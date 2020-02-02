@@ -1,114 +1,84 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
+  Image,
+  StyleSheet,
+  Platform,
+  Dimensions
 } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faHeart as sHeart} from '@fortawesome/free-solid-svg-icons'
+import { faHeart as rHeart} from '@fortawesome/free-regular-svg-icons'
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const width = Dimensions.get('screen').width
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <View style={styles.header}>
+          <Image 
+            style={styles.imgHeader}
+            source={{uri :'https://i.imgur.com/ZrDq6UQ.jpg'}} 
+          />
+          <Text style={styles.userHeader}>andreymasiero</Text>
+        </View>
+        <Image 
+          style={styles.picture}
+          source={{uri :'https://i.imgur.com/ZrDq6UQ.jpg'}} 
+        />
+        <View style={styles.containerLikes}>
+          <FontAwesomeIcon icon={false ? sHeart : rHeart} 
+            size={32} 
+            style={false ? styles.heart : {}}/>
+          <Text style={styles.leftSpace} >2 curtidas</Text>
+        </View>
+        <Text style={styles.leftSpace} numberOfLines={3} >
+          <Text style={styles.userPost}>andreymasiero  </Text>
+          Landscape painted on the surface of a cut log
+        </Text>
+      </>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  header : {
+    flexDirection : 'row',
+    alignItems: 'center',
+    padding : 16
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  imgHeader : {
+    height : 48,
+    width : 48,
+    borderRadius : 50,
+    marginRight : 8
   },
-  body: {
-    backgroundColor: Colors.white,
+  userHeader : {
+    fontFamily : Platform.os === 'ios' ? 
+                'AveniNext-Regular' : 'Roboto',
+    fontSize : 16
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  picture : {
+    width : width,
+    height : width
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
+  containerLikes : {
+    flexDirection : 'row',
+    alignItems : 'center',
+    padding : 8
+  }, 
+  heart : {
+    color : 'red'
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
+  leftSpace : {
+    paddingHorizontal : 8
   },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  userPost : {
+    fontWeight : 'bold'
+  }
 });
+
 
 export default App;
